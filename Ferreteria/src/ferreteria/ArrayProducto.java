@@ -1,6 +1,7 @@
 
 package ferreteria;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ import java.util.Scanner;
  * @author Luis Galicia
  * @version 1.0
  */
-public class ArrayProducto {
+public class ArrayProducto implements Serializable{
     //campos del array
     private String nombre;
     private String clave;
@@ -208,6 +209,7 @@ public class ArrayProducto {
         boolean existe = false;
         modifica = inv.lectura();
         Porcentaje ptje = new Porcentaje();
+        Venta vendido = new Venta();
         for (int i = 0; i < modifica.size(); i++) {
             if(modifica.get(i).getClave().equals(clave)) {
                 //muestra datos
@@ -242,6 +244,7 @@ public class ArrayProducto {
                     modifica.get(pos).setExistencia( //actualiza las existencias
                             modifica.get(pos).getExistencia()-vende);
                     inv.escritura(modifica);
+                    vendido.agregaVenta(modifica.get(pos), vende);
                 } else {
                     System.out.println("No hay suficiente producto en existencia.");
                 }
@@ -249,6 +252,38 @@ public class ArrayProducto {
         } else {
             System.out.println("Producto no encontrado :/");
         }
-    } 
+    }
+    /**
+     * Método que agrega existencias al archivo
+     * @param clv clave del producto
+     */
+    public void agregarExistencia(String clv) {
+        int agrega = 0;
+        boolean entra = false;
+        modifica = inv.lectura();
+        for (int i = 0; i < modifica.size(); i++) {
+            if(modifica.get(i).getClave().equals(clv)) {
+                System.out.println((i+1)+".NOMBRE:" + 
+                        modifica.get(i).getNombre() +
+                    " CLAVE:" + modifica.get(i).getClave() + 
+                    "\n DESCRIPCIÓN:" + modifica.get(i).getDescripcion() + 
+                    "\n TIPO DE UNIDAD:" + modifica.get(i).getTipoUnidad() +
+                    " EXISTENCIA:" + modifica.get(i).getExistencia() + 
+                    " PRECIO:" + modifica.get(i).getPrecio());
+                System.out.println("\n ¿Qué cantidad de "+
+                        modifica.get(i).getTipoUnidad()+ " vas a agregar?");
+                agrega = sc.nextInt();
+                modifica.get(i).setExistencia( //modifica las existencias
+                modifica.get(i).getExistencia()+agrega);
+                entra = true;
+            } 
+        }
+        if(true) {
+            inv.escritura(modifica);
+            System.out.println("Se agregaron existencias");
+        } else {
+            System.out.println("Producto no encontrado");
+        }
+    }
 }//fin de la clase
 

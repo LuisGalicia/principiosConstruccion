@@ -30,7 +30,9 @@ public class MenuOp {
                 + "4.BUSCAR POR NOMBRE O CLAVE\n"
                 + "5.EDITAR\n"
                 + "6.VENTA\n"
-                + "7.SALIR");
+                + "7.MOSTRAR VENTAS\n"
+                + "9.AGREGAR EXISTENCIA\n"
+                + "8.SALIR");
     }
     /**
      * Ejecuta la opcion seleccionada
@@ -38,6 +40,7 @@ public class MenuOp {
      */
     public void ejecuta(int op) {
         ArrayProducto prod = new ArrayProducto();
+        Venta vendido = new Venta();
         String name;
         switch(op) {
             case 1:
@@ -66,6 +69,14 @@ public class MenuOp {
                 prod.venta(sc.nextLine());
                 break;
             case 7:
+                vendido.muestraVentas();
+                break;
+            case 8:
+                System.out.println("Ingresa la clave del producto: ");
+                name = sc.nextLine();
+                prod.agregarExistencia(name);
+                break;
+            case 9:
                 System.out.println("Vuelve pronto");
                 break;
             default:
