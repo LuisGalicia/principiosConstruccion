@@ -29,10 +29,11 @@ public class MenuOp {
                 + "3.ELIMINAR\n"
                 + "4.BUSCAR POR NOMBRE O CLAVE\n"
                 + "5.EDITAR\n"
-                + "6.VENTA\n"
+                + "6.REALIZAR VENTA\n"
                 + "7.MOSTRAR VENTAS\n"
+                + "8.MOSTRAR VENTAS POR FECHA\n"
                 + "9.AGREGAR EXISTENCIA\n"
-                + "8.SALIR");
+                + "10.SALIR");
     }
     /**
      * Ejecuta la opcion seleccionada
@@ -72,11 +73,20 @@ public class MenuOp {
                 vendido.muestraVentas();
                 break;
             case 8:
+                int dia;
+                int mes;
+                System.out.println("Ingresa el día");
+                dia = sc.nextInt();
+                System.out.println("Ingresa el mes por número");
+                mes = sc.nextInt();
+                vendido.ventaPorDia(dia, mes);
+                break;
+            case 9:
                 System.out.println("Ingresa la clave del producto: ");
                 name = sc.nextLine();
                 prod.agregarExistencia(name);
                 break;
-            case 9:
+            case 10:
                 System.out.println("Vuelve pronto");
                 break;
             default:
@@ -99,8 +109,7 @@ public class MenuOp {
      * Método que muestra las opciones al seleccionar Editar
      */
     public void menuEditar() {
-        System.out.println("¿Qué deseas editar?\n"
-                        + "1.Nombre\n"
+        System.out.println("¿Qué deseas editar?\n" + "1.Nombre\n"
                         + "2.Clave\n"
                         + "3.Descripcion\n"
                         + "4.Tipo de unidad\n"

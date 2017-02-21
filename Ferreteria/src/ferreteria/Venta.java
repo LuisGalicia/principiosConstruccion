@@ -62,27 +62,45 @@ public class Venta {
         } 
     }
     /**
-     * Método que agrega productos vendidos al archivo Ventas
+     * Método que agrega productos vendidos al archivo Ventas y los registra
+     * por día 
      * @param produ producto a agregar
      * @param vendido existencias vendidas 
      */
     public void agregaVenta(Producto produ, int vendido) {
-        ArrayList<Producto> arrPro = new ArrayList<>();
+        int ulPosi = 0;
         boolean exis = false;
+        ArrayList<Producto> arrPro = new ArrayList<>();
+        Fecha feActual = new Fecha();
+        
+        produ.setDia(feActual.getDia());
+        produ.setMes(feActual.getMes());
+        produ.setAnio(feActual.getAnio());
+        produ.setHora(feActual.getHora());
+        produ.setMinuto(feActual.getMinuto());
         
         if(arch.exists()) {
             arrPro = lecturaVenta();
-            //busca si el producto ya se ha vendido
-            for (int i = 0; i < arrPro.size(); i++) {
-                if(produ.getClave().equals(arrPro.get(i).getClave())) {
-                    //agrega existencias a las ventas
-                    arrPro.get(i).setExistencia(
-                    arrPro.get(i).getExistencia()+vendido);
-                    exis = true;
-            }  
-            }
-            if(exis){
-                escrituraVenta(arrPro);
+            ulPosi = arrPro.size()-1;    //última posición del arrayList
+            //compara si la fecha es igual a la última fecha registrada
+            if(produ.getDia() == arrPro.get(ulPosi).getDia() && 
+                    produ.getMes() == arrPro.get(ulPosi).getMes()) {
+                //busca si el producto ya se ha vendido
+                for (int i = 0; i < arrPro.size(); i++) {
+                    if(produ.getClave().equals(arrPro.get(i).getClave())) {
+                        //agrega existencias a las ventas
+                        arrPro.get(i).setExistencia(
+                        arrPro.get(i).getExistencia()+vendido);
+                        exis = true;
+                }  
+                }
+                if(exis){
+                    escrituraVenta(arrPro);
+                } else {
+                    produ.setExistencia(vendido);
+                    arrPro.add(produ);
+                    escrituraVenta(arrPro);
+                }
             } else {
                 produ.setExistencia(vendido);
                 arrPro.add(produ);
@@ -100,9 +118,11 @@ public class Venta {
     public void muestraVentas() {
         ArrayList<Producto> modifica = new ArrayList<>();
         modifica =  lecturaVenta();
-        if(modifica.isEmpty()){
+        
+        if (modifica.isEmpty()) {
             System.out.println("No se han realizado ventas");
         }
+        
         Collections.sort(modifica, new Compara());
         
         for (int i = 0; i < modifica.size(); i++) {
@@ -111,7 +131,46 @@ public class Venta {
                     "\n DESCRIPCIÓN:" + modifica.get(i).getDescripcion() + 
                     "\n TIPO DE UNIDAD:" + modifica.get(i).getTipoUnidad() +
                     " Vendidos:" + modifica.get(i).getExistencia() + 
-                    " PRECIO:" + modifica.get(i).getPrecio());
+                    " PRECIO:" + modifica.get(i).getPrecio() + 
+                    " Fecha:" + modifica.get(i).getDia() + "/" +
+                    modifica.get(i).getMes() + "/" + modifica.get(i).getAnio() +
+                    "   " + modifica.get(i).getHora() + ":" + 
+                    modifica.get(i).getMinuto());
+        }
+    }
+    
+    public void ventaPorDia(int dia, int mes) {
+        boolean existe = false;
+        ArrayList<Producto> modifica = new ArrayList<>();
+        modifica =  lecturaVenta();
+        
+        if (modifica.isEmpty()) {
+            System.out.println("No se han realizado ventas");
+        }
+        
+        Collections.sort(modifica, new Compara());
+        
+        for (int i = 0; i < modifica.size(); i++) {
+            //entra solo en las ventas realizadas el dia y mes indicados
+            if(modifica.get(i).getDia() == dia && 
+                modifica.get(i).getMes() == mes){
+                
+                System.out.println((i+1)+
+                    ".NOMBRE:" + modifica.get(i).getNombre() +
+                    " CLAVE:" + modifica.get(i).getClave() + 
+                    "\n DESCRIPCIÓN:" + modifica.get(i).getDescripcion() + 
+                    "\n TIPO DE UNIDAD:" + modifica.get(i).getTipoUnidad() +
+                    " Vendidos:" + modifica.get(i).getExistencia() + 
+                    " PRECIO:" + modifica.get(i).getPrecio() + 
+                    " Fecha:" + modifica.get(i).getDia() + "/" +
+                    modifica.get(i).getMes() + "/" + modifica.get(i).getAnio() +
+                    "   " + modifica.get(i).getHora() + ":" + 
+                    modifica.get(i).getMinuto());
+                existe = true;
+            }
+        }
+        if(!existe) {
+            System.out.println("No hay ventas en esa fecha");
         }
     }
 }

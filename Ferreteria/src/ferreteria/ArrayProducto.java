@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Luis Galicia
  * @version 1.0
  */
-public class ArrayProducto implements Serializable{
+public class ArrayProducto implements Serializable {
     //campos del array
     private String nombre;
     private String clave;
@@ -53,14 +53,14 @@ public class ArrayProducto implements Serializable{
             
             guarda = new Producto(nombre, clave, descripcion, tipoUnidad,
             existencia, precio);
-            modifica.add(guarda); //agrega productos al arraylist
+            modifica.add(guarda);   //agrega productos al arraylist
             
             System.out.println("Producto agregado adecuadamente");
             System.out.println("¿Deseas agregar otro producto? (1).Si (2).No");
             aux = sc.nextInt();
             sc.nextLine();
-        } while(aux == 1);
-        inv.arrayAux(modifica); //comprueba que exista o no un archivo
+        } while (aux == 1);
+        inv.arrayAux(modifica);   //comprueba que exista o no un archivo
         
         
     }
@@ -69,7 +69,7 @@ public class ArrayProducto implements Serializable{
      */
     public void muestra() {
         modifica =  inv.lectura();
-        if(modifica.isEmpty()){
+        if (modifica.isEmpty()) {
             System.out.println("Inventario vacio");
         }
         Collections.sort(modifica, new Compara());
@@ -91,12 +91,12 @@ public class ArrayProducto implements Serializable{
         modifica = inv.lectura();
         boolean existe = false;
         for (int i = 0; i < modifica.size(); i++) {
-            if(modifica.get(i).getNombre().equals(name)) { 
+            if (modifica.get(i).getNombre().equals(name)) { 
                 modifica.remove(i);
                 existe = true;
             }
         }
-        if(existe){
+        if (existe) {
             inv.escritura(modifica);
             System.out.println("Se eliminó correctamente");
         } else {
@@ -116,12 +116,12 @@ public class ArrayProducto implements Serializable{
         MenuOp mE = new MenuOp();
         modifica = inv.lectura();
         for (int i = 0; i < modifica.size(); i++) {
-            if(modifica.get(i).getNombre().equals(name)){
+            if (modifica.get(i).getNombre().equals(name)) {
                 existe = true;
                 do {
                     mE.menuEditar();
                     opcion = mE.opci();
-                    switch(opcion) {
+                    switch (opcion) {
                         case 1:
                             System.out.println("Nuevo nombre: ");
                             almacena = sc.nextLine();
@@ -162,17 +162,17 @@ public class ArrayProducto implements Serializable{
                             System.out.println("Opción no válida .-.");
                             break;
                     } //fin SWITCH
-                } while (opcion !=7); //fin DO
+                } while (opcion != 7); //fin DO
             } //fin IF
         } //fin FOR
-        if(existe){
+        if (existe) {
             inv.escritura(modifica);
             System.out.println("Se editó correctamente");
         } else {
             System.out.println("Producto no encontrado");
         }
         
-    } //fin METODO
+    }   //fin METODO
     
     /**
      * Permite al usuario buscar un producto por clave o nombre de producto
@@ -193,7 +193,7 @@ public class ArrayProducto implements Serializable{
                     " Precio: " + modifica.get(i).getPrecio());   
             } 
         }
-        if(!existe){
+        if (!existe) {
             System.out.println("Producto no encontrado");
         }
     }
@@ -215,8 +215,8 @@ public class ArrayProducto implements Serializable{
                 //muestra datos
                 System.out.println("Nombre: "+ modifica.get(i).getNombre()
                         + "  Clave: "+ modifica.get(i).getClave()
-                        + "  Existencias: "+ modifica.get(i).getExistencia()+"\n"
-                        + "Descripción: "+ modifica.get(i).getDescripcion()+"\n"
+                        + "  Existencias:"+ modifica.get(i).getExistencia()+"\n"
+                        + "Descripción:"+ modifica.get(i).getDescripcion()+"\n"
                         + "Precio por "+ modifica.get(i).getTipoUnidad()+ ": "
                         + ptje.calculaPre(modifica.get(i).getPrecio(), 1)
                         + "     Iva:"+
@@ -226,27 +226,31 @@ public class ArrayProducto implements Serializable{
             }
         }
         //entra solo si existe el producto
-        if(existe) {
-            if(modifica.get(pos).getExistencia() == 0) {
+        if (existe) {
+            if (modifica.get(pos).getExistencia() == 0) {
                 System.out.println("No hay existencias");
             } else {
                 System.out.println("¿Cuántas existencias venderás?...");
                 vende = sc.nextInt();
                 
-                if(vende <= modifica.get(pos).getExistencia()) {
+                if (vende <= modifica.get(pos).getExistencia()) {
                     //guarda el precio de venta
-                    tPrecio = ptje.calculaPre(modifica.get(pos).getPrecio(), vende);
+                    tPrecio = ptje.calculaPre(modifica.get(pos).getPrecio(),
+                            vende);
                     //guarda el precio del IVA del producto
-                    tIva = ptje.calculaIva(modifica.get(pos).getPrecio(), vende);
+                    tIva = ptje.calculaIva(modifica.get(pos).getPrecio(), 
+                            vende);
                     System.out.println("Precio total: "+ tPrecio
                             + "     Iva total: "+ tIva+"\n"
                             + "Total a pagar: "+ (tPrecio+tIva));
-                    modifica.get(pos).setExistencia( //actualiza las existencias
+                    //actualiza las existencias
+                    modifica.get(pos).setExistencia( 
                             modifica.get(pos).getExistencia()-vende);
                     inv.escritura(modifica);
                     vendido.agregaVenta(modifica.get(pos), vende);
                 } else {
-                    System.out.println("No hay suficiente producto en existencia.");
+                    System.out.println("No hay suficiente "
+                            + "producto en existencia.");
                 }
             }
         } else {
@@ -262,14 +266,14 @@ public class ArrayProducto implements Serializable{
         boolean entra = false;
         modifica = inv.lectura();
         for (int i = 0; i < modifica.size(); i++) {
-            if(modifica.get(i).getClave().equals(clv)) {
+            if (modifica.get(i).getClave().equals(clv)) {
                 System.out.println((i+1)+".NOMBRE:" + 
                         modifica.get(i).getNombre() +
-                    " CLAVE:" + modifica.get(i).getClave() + 
-                    "\n DESCRIPCIÓN:" + modifica.get(i).getDescripcion() + 
-                    "\n TIPO DE UNIDAD:" + modifica.get(i).getTipoUnidad() +
-                    " EXISTENCIA:" + modifica.get(i).getExistencia() + 
-                    " PRECIO:" + modifica.get(i).getPrecio());
+                        " CLAVE:" + modifica.get(i).getClave() + 
+                        "\n DESCRIPCIÓN:" + modifica.get(i).getDescripcion() + 
+                        "\n TIPO DE UNIDAD:" + modifica.get(i).getTipoUnidad() +
+                        " EXISTENCIA:" + modifica.get(i).getExistencia() + 
+                        " PRECIO:" + modifica.get(i).getPrecio());
                 System.out.println("\n ¿Qué cantidad de "+
                         modifica.get(i).getTipoUnidad()+ " vas a agregar?");
                 agrega = sc.nextInt();
@@ -278,7 +282,7 @@ public class ArrayProducto implements Serializable{
                 entra = true;
             } 
         }
-        if(true) {
+        if (true) {
             inv.escritura(modifica);
             System.out.println("Se agregaron existencias");
         } else {

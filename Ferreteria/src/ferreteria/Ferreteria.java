@@ -17,7 +17,7 @@ public class Ferreteria {
         me.opciones();
         op = me.opci();
         me.ejecuta(op);
-        } while (op !=9);
+        } while (op != 10);
     }
     
 }

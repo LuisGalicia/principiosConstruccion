@@ -1,8 +1,6 @@
 package ferreteria;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Esta clase define productos con atributos serializables
@@ -16,6 +14,11 @@ public class Producto implements Serializable{
     private String clave;
     private String descripcion;
     private String tipoUnidad;
+    private int dia;
+    private int mes;
+    private int anio;
+    private int hora;
+    private int minuto;
     private int existencia;
     private float precio;
     /**
@@ -27,7 +30,7 @@ public class Producto implements Serializable{
     /**
      * Constructor que recibe todo los campos de producto
      */
-    public Producto(String nombre, String clave, String descripcion, 
+    public Producto (String nombre, String clave, String descripcion, 
             String tipoUnidad, int existencia, float precio) {
         this.nombre = nombre;
         this.clave = clave;
@@ -91,6 +94,76 @@ public class Producto implements Serializable{
      */
     public void setTipoUnidad(String tipoUnidad) {
         this.tipoUnidad = tipoUnidad;
+    }
+    /**
+     * Devuelve el día
+     * @return día 
+     */
+    public int getDia() {
+        return dia;
+    }
+    /**
+     * Modifica el día
+     * @param dia nuevo 
+     */
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
+    /**
+     * Devuelve el mes
+     * @return mes 
+     */
+    public int getMes() {
+        return mes;
+    }
+    /**
+     * Modifica el mes
+     * @param mes nuevo
+     */
+    public void setMes(int mes) {
+        this.mes = mes;
+    }
+    /**
+     * Devuelve el Año
+     * @return año
+     */
+    public int getAnio() {
+        return anio;
+    }
+    /**
+     * Modifica el año
+     * @param anio nuevo
+     */
+    public void setAnio(int anio) {
+        this.anio = anio;
+    }
+    /**
+     * Devuelve la hora actual
+     * @return hora
+     */
+    public int getHora() {
+        return hora;
+    }
+    /**
+     * Modifica la hora
+     * @param hora nueva
+     */
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
+    /**
+     * Devuelve el mes actual
+     * @return hora
+     */
+    public int getMinuto() {
+        return minuto;
+    }
+    /**
+     * Modifica los minutos
+     * @param minuto nuevos
+     */
+    public void setMinuto(int minuto) {
+        this.minuto = minuto;
     }
     /**
      * Devuelve la existencia del producto
