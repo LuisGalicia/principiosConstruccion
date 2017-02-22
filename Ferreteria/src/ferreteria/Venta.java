@@ -140,8 +140,14 @@ public class Venta {
     }
     
     public void ventaPorDia(int dia, int mes) {
+        float preIva = 0;
+        float prePro = 0;
+        float preGan = 0;
+        float precioTotal = 0;
+        float ganancia = 0;
         boolean existe = false;
         ArrayList<Producto> modifica = new ArrayList<>();
+        Porcentaje po = new Porcentaje();
         modifica =  lecturaVenta();
         
         if (modifica.isEmpty()) {
@@ -166,9 +172,18 @@ public class Venta {
                     modifica.get(i).getMes() + "/" + modifica.get(i).getAnio() +
                     "   " + modifica.get(i).getHora() + ":" + 
                     modifica.get(i).getMinuto());
+                preIva = po.calculaIva(modifica.get(i).getPrecio(),
+                        modifica.get(i).getExistencia());
+                prePro = po.calculaPre(modifica.get(i).getPrecio(),
+                        modifica.get(i).getExistencia());
+                precioTotal = precioTotal + preIva + prePro;
+                ganancia = ganancia +
+                        (prePro - modifica.get(i).getPrecio());
                 existe = true;
             }
         }
+        System.out.println("\nTotal de precio de ventas: "+ precioTotal+ "\n"
+            + "Ganancia total: "+ ganancia);
         if(!existe) {
             System.out.println("No hay ventas en esa fecha");
         }
