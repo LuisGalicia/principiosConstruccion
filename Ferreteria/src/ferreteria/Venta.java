@@ -138,7 +138,11 @@ public class Venta {
                     modifica.get(i).getMinuto());
         }
     }
-    
+    /**
+     * Método que calcula las ventas por día y las ganancias de ese día
+     * @param dia día en que se realizó la venta 
+     * @param mes mes en que se realizó la venta
+     */
     public void ventaPorDia(int dia, int mes) {
         float preIva = 0;
         float prePro = 0;

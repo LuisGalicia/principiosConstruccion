@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/interfazFerre/InterfazFerreteria.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>40</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/ArrayProducto.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Porcentaje.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Ferreteria.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Inventario.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Producto.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Venta.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Fecha.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/MenuOp.java</file>
-            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/ferreteria/Compara.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/PanelInventario.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/MostrarInter.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/NuevoInter.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/EditarInter.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/EliminarInter.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/InterfazFerreteria.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/ExistenciaInter.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/AgregaInter.java</file>
+            <file>file:/C:/Users/lugad/Desktop/Ingenieria%20de%20Software/4°%20semestre/PruebaGit/principiosConstruccion/Ferreteria/src/interfazFerre/BuscarInter.java</file>
         </group>
     </open-files>
 </project-private>
