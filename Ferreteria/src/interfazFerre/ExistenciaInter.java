@@ -26,7 +26,6 @@ import javafx.scene.text.Text;
 public class ExistenciaInter {
     TextField clvNombre = new TextField();
     TextField exisNueva = new TextField();
-    VBox general = new VBox();
     Tab tab5 = new Tab("Existencia");
     ArrayList<Producto> productos;
     Producto aux = new Producto();
@@ -87,6 +86,7 @@ public class ExistenciaInter {
                 } else {
                     noSeEncontro();
                 }
+                bandera = false;
                 clvNombre.clear();
             }
         });
@@ -100,7 +100,6 @@ public class ExistenciaInter {
              public void handle(ActionEvent event) {
                 productos = inv.lectura();
                 try{
-                    System.out.println("entra try");
                     exisAgregada = Integer.parseInt(exisNueva.getText());
                 } catch (NumberFormatException e ) {
                     System.out.println("mal");
@@ -140,6 +139,7 @@ public class ExistenciaInter {
     }
      
      public VBox productoBuscado(Producto pr) {
+         VBox general = new VBox();
          GridPane guardaPro = new GridPane();
          HBox agregando = new HBox();
          
@@ -162,11 +162,12 @@ public class ExistenciaInter {
          texClv.setText(pr.getClave());
          texExist.setText(String.valueOf(pr.getExistencia()));
          
+         agregando.setSpacing(10);
          agregando.getChildren().add(agregaExis);
          agregando.getChildren().add(exisNueva);
          agregando.getChildren().add(agregaExis());
          
-         guardaPro.setPadding(new Insets(15, 30, 30, 20));
+         guardaPro.setPadding(new Insets(35, 30, 30, 20));
          guardaPro.setVgap(20);
          guardaPro.setHgap(20);
          guardaPro.add(nombre, 0, 0);
@@ -176,6 +177,7 @@ public class ExistenciaInter {
          guardaPro.add(existencia, 0, 2);
          guardaPro.add(texExist, 1, 2);
          
+         general.setPadding(new Insets(15, 0, 0, 20));
          general.getChildren().add(titulo);
          general.getChildren().add(guardaPro);
          general.getChildren().add(agregando);

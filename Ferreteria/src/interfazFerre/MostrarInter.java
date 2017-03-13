@@ -4,7 +4,11 @@ package interfazFerre;
 import ferreteria.Inventario;
 import ferreteria.Producto;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +26,8 @@ public class MostrarInter {
     private ArrayList<Producto> productos;
     private Inventario inv;
     private TableView<Producto> table;
+    Tab tabMuest = new Tab("Mostrar");
+    private Button actualizar = new Button("Actualizar");
     
     public MostrarInter() {
         productos = new ArrayList<>();
@@ -30,11 +36,10 @@ public class MostrarInter {
     }
     
     public Tab tabMuestra() {
-        Tab tab2 = new Tab("Mostrar");
-        tab2.setContent(panMostrar());
-        tab2.setClosable(false);
+        tabMuest.setContent(panMostrar());
+        tabMuest.setClosable(false);
         
-        return tab2;
+        return tabMuest;
     }
     
     public VBox panMostrar() {
@@ -47,8 +52,21 @@ public class MostrarInter {
         grupo.setPadding(new Insets(10, 0, 0,10));
         grupo.getChildren().add(titulo);
         grupo.getChildren().add(tableMuestra());
+        grupo.getChildren().add(bActualizar());
         
         return grupo;
+    }
+    
+    public Button bActualizar() {
+        actualizar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tabMuest.setContent(panMostrar());
+                
+            }
+        });
+        
+        return actualizar;
     }
     
     public TableView tableMuestra() {

@@ -1,7 +1,9 @@
 
 package interfazFerre;
 
+import java.util.ArrayList;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -25,12 +27,16 @@ import javafx.stage.Stage;
  * @author lugad
  */
 public class UsuarioInter extends Application {
+    Button aceptar = new Button("Aceptar");
+    TextField fieldUsua = new TextField();
+    PasswordField fieldPass = new PasswordField();
+    ControlUser usuarios = new ControlUser();
+    ArrayList<User> user = new ArrayList<>();
     
     @Override
     public void start(Stage primaryStage) {
         GridPane panel = new GridPane();
         HBox paraBoton = new HBox(20);
-        Button aceptar = new Button("Aceptar");
         paraBoton.setAlignment(Pos.BOTTOM_RIGHT);
         paraBoton.getChildren().add(aceptar);
         
@@ -40,8 +46,19 @@ public class UsuarioInter extends Application {
         Label usua = new Label("Usuario:");
         Label pass = new Label("Contraseña:");
         
-        TextField fieldUsua = new TextField();
-        PasswordField fieldPass = new PasswordField();
+        aceptar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(fieldUsua.getText().equals("administrador") && 
+                        fieldPass.getText().equals("12345")) {
+                    Stage nue = new Stage();
+                    InterfazFerreteria inFe = new InterfazFerreteria();
+                    inFe.start(nue);
+                    System.out.println("funciona");
+                    primaryStage.close();
+                }
+            }
+        });
         
         panel.setAlignment(Pos.CENTER);
         panel.setVgap(10);
