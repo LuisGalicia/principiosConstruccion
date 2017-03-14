@@ -2,7 +2,9 @@
 package interfazFerre;
 
 import ferreteria.Inventario;
+import ferreteria.Porcentaje;
 import ferreteria.Producto;
+import ferreteria.Venta;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,22 +14,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- * Clase que contiene el Tab de Editar
+ * Esta clase realiza contiene métodos para mostrar Tab de Realizar venta
  * @author Luis Galicia
  * @version 0.1
- * Fecha: 11/03/2017
+ * Fecha: 14/03/2017
  */
-public class EditarInter {
+public class RalizaVentaInter {
     private Label labIngresa = new Label("Ingresa nombre o clave del producto");
     private Tab tabEdita = new Tab("Editar");
     private TextField clvNombre = new TextField();
@@ -37,41 +37,48 @@ public class EditarInter {
     private TextField texDescrip = new TextField();
     private TextField texExistencia = new TextField();
     private TextField texPre = new TextField();
+    private TextField texCantidad = new TextField();
     private Producto aux = new Producto();
     private ArrayList<Producto> productos;
     private Inventario inv;
     private boolean bandera = false;
     private int pos;
     private int exis;
+    private int exisVendida;
     private float prec;
+    private Tab reaVenta = new Tab("RealizarVenta");
+    Porcentaje ptje = new Porcentaje();
+    Venta vendido = new Venta();
+    float tPrecio;
+    float tIva;
     
     /**
-     * Constructor que inicializa el arrayList y el inventario
+     * Constructor que inicializa el arrayList e inventario
      */
-    public EditarInter() {
+    public RalizaVentaInter() {
         this.productos = new ArrayList<>();
         this.inv = new Inventario();
     }
     
     /**
-     * Método que crea el Tab de Editar con la vista principal
-     * @return tab de editar
+     * Método que devuelve Tab de realizar venta
+     * @return tab de realizar venta
      */
-    public Tab tabEdita() {
-        tabEdita.setClosable(false);
-        tabEdita.setContent(panEdita());
+    public Tab tabRealiza() {
+        reaVenta.setClosable(false);
+        reaVenta.setContent(panRealiza());
         
-        return tabEdita;
+        return reaVenta;
     }
     
     /**
      * Panel que incluye la vista principal de Editar
      * @return 
      */
-    public GridPane panEdita() {
+    public GridPane panRealiza() {
         GridPane existen = new GridPane();
         
-        Text titulo = new Text("Editar información de un Producto");
+        Text titulo = new Text("Venta de un Producto");
         titulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
         
         existen.setPadding(new Insets(15, 30, 30, 20));
@@ -105,7 +112,7 @@ public class EditarInter {
                     }   
                 }
                 if(bandera) {
-                    tabEdita.setContent(editaSecun(aux));
+                    reaVenta.setContent(realizaSecun(aux));
                 } else {
                     noSeEncontro();
                 }
@@ -117,53 +124,46 @@ public class EditarInter {
     }
     
     /**
-     * Método que crea botón de actualizar
-     * @return botón de actualizar
+     * Método que  crea cuadro dialogo de actualizado
+     * @return cuadro de información
      */
-    public Button bActualizar() {
-        Button actua = new Button("Actualizar");
-        actua.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                productos = inv.lectura();
-                try{
-                    exis = Integer.parseInt(texExistencia.getText());
-                } catch (NumberFormatException e ) {
-                    System.out.println("Mal: " + e.getMessage());
-                }
-                try{
-                    prec = Float.parseFloat(texPre.getText());
-                } catch (NumberFormatException e ) {
-                    System.out.println("Mal: " + e.getMessage());
-                }
-                productos.get(pos).setNombre(texName.getText());
-                productos.get(pos).setClave(texClv.getText());
-                productos.get(pos).setDescripcion(texDescrip.getText());
-                productos.get(pos).setTipoUnidad(texTipUni.getText());
-                productos.get(pos).setPrecio(prec);
-                productos.get(pos).setExistencia(exis);
-
-                inv.escritura(productos);
-                tabEdita.setContent(panEdita());
-                actualizadoCorrectamente();
-            }
-        });
-        return actua;
+    public Alert ventaCorrectamente() {
+        Alert agregado = new Alert(Alert.AlertType.INFORMATION);
+        agregado.setTitle("Venta realizada correctamente");
+        agregado.setHeaderText("Precio total: " + (tPrecio + tIva) +
+                "\nIva: " + tIva);
+        agregado.setContentText(null);
+        agregado.showAndWait();
+        
+        return agregado;
     }
     
     /**
-     * Método que cancela opción y vuelve a vista principal del tab Eliminar
-     * @return botón cancelar
+     * Método que  crea cuadro dialogo de no hay productos
+     * @return cuadro de información
      */
-    public Button bCancelar() {
-        Button cance = new Button("Cancelar");
-        cance.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                tabEdita.setContent(panEdita());
-            }
-        });
-        return cance;
+    public Alert noHayProducto() {
+        Alert agregado = new Alert(Alert.AlertType.INFORMATION);
+        agregado.setTitle("Nada vendido");
+        agregado.setHeaderText("No se han agregado productos para vender");
+        agregado.setContentText(null);
+        agregado.showAndWait();
+        
+        return agregado;
+    }
+    
+    /**
+     * Método que  crea cuadro dialogo de no hay suficientes productos
+     * @return cuadro de información
+     */
+    public Alert noSuficienteProducto() {
+        Alert agregado = new Alert(Alert.AlertType.INFORMATION);
+        agregado.setTitle("Nada vendido");
+        agregado.setHeaderText("No se hay suficientes productos para vender");
+        agregado.setContentText(null);
+        agregado.showAndWait();
+        
+        return agregado;
     }
     
     /**
@@ -173,7 +173,7 @@ public class EditarInter {
     public Alert noSeEncontro() {
         Alert agregado = new Alert(Alert.AlertType.INFORMATION);
         agregado.setTitle("Cuadro de Informacion");
-        agregado.setHeaderText("No se encontro el producto");
+        agregado.setHeaderText("No se encontró el producto");
         agregado.setContentText(null);
         agregado.showAndWait();
         
@@ -181,29 +181,68 @@ public class EditarInter {
     }
     
     /**
-     * Método que  crea cuadro dialogo de actualizado
-     * @return cuadro de información
+     * Método que cancela opción y vuelve a vista principal del tab Eliminar
+     * @return botón cancelar
      */
-    public Alert actualizadoCorrectamente() {
-        Alert agregado = new Alert(Alert.AlertType.INFORMATION);
-        agregado.setTitle("Cuadro de Informacion");
-        agregado.setHeaderText("Producto actualizado correctamente");
-        agregado.setContentText(null);
-        agregado.showAndWait();
-        
-        return agregado;
+    public Button bCancelar() {
+        Button cance = new Button("Vender otro");
+        cance.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tabRealiza().setContent(panRealiza());
+            }
+        });
+        return cance;
     }
     
     /**
-     * Método con vista secundaria de Editar
+     * Método que crea botón de vender con acciones
+     * @return botón de vender
+     */
+    public Button bVender() {
+        Button actua = new Button("Vender");
+        actua.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                productos = inv.lectura();
+                try{
+                    exisVendida = Integer.parseInt(texCantidad.getText());
+                } catch (NumberFormatException e ) {
+                    System.out.println("Mal: " + e.getMessage());
+                }
+                if(exisVendida == 0 || texCantidad.getText().isEmpty()) {
+                    noHayProducto();
+                }else{
+                    if(exisVendida <= productos.get(pos).getExistencia()) {
+                        tPrecio = ptje.calculaPre(productos.get(pos).getPrecio(),
+                                exisVendida);
+                        tIva = ptje.calculaIva(productos.get(pos).getPrecio(), 
+                                exisVendida);
+
+                        productos.get(pos).setExistencia( 
+                                productos.get(pos).getExistencia()-exisVendida);
+                        inv.escritura(productos);
+                        vendido.agregaVenta(productos.get(pos), exisVendida);
+                        ventaCorrectamente(); 
+                    } else {
+                        noSuficienteProducto();
+                    }
+                }
+            }
+        });
+        return actua;
+    }
+    
+    /**
+     * Método con vista secundaria de Realizar Venta
      * @param pr producto a leer
      * @return VBox con información del producto
      */
-    public VBox editaSecun(Producto pr) {
+    public VBox realizaSecun(Producto pr) {
          VBox general = new VBox();
          GridPane guardaPro = new GridPane();
          
-         Text titulo = new Text("Editar información de un Producto");
+         Text titulo = new Text("Hacer venta de un producto");
          titulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
          
          Label nombre = new Label("Nombre");
@@ -212,16 +251,22 @@ public class EditarInter {
          Label descrip = new Label("Descripcion");
          Label existencia = new Label("Existencia");
          Label pre = new Label("Precio");
-         
+         Label cantidad = new Label("Cantidad de productos a vender");
          
          texName.setText(pr.getNombre());
+         texName.setEditable(false);
          texClv.setText(pr.getClave());
+         texName.setEditable(false);
          texTipUni.setText(pr.getTipoUnidad());
+         texTipUni.setEditable(false);
          texDescrip.setText(pr.getDescripcion());
+         texDescrip.setEditable(false);
          texPre.setText(String.valueOf(pr.getPrecio()));
+         texPre.setEditable(false);
          texExistencia.setText(String.valueOf(pr.getExistencia()));
-         
-         texExistencia.setOnKeyTyped(new EventHandler<KeyEvent>() {
+         texExistencia.setEditable(false);
+
+         texCantidad.setOnKeyTyped(new EventHandler<KeyEvent>() {
              @Override
              public void handle(KeyEvent event) {
                  String caracter = event.getCharacter();
@@ -230,21 +275,6 @@ public class EditarInter {
                          || caracter.equals("4") || caracter.equals("5")
                          || caracter.equals("6") || caracter.equals("7")
                          || caracter.equals("8") || caracter.equals("9"))) {
-                    event.consume();
-                 }
-             }
-         }
-         );
-         texPre.setOnKeyTyped(new EventHandler<KeyEvent>() {
-             @Override
-             public void handle(KeyEvent event) {
-                 String caracter = event.getCharacter();
-                 if(!(caracter.equals("0") || caracter.equals("1")
-                         || caracter.equals("2") || caracter.equals("3")
-                         || caracter.equals("4") || caracter.equals("5")
-                         || caracter.equals("6") || caracter.equals("7")
-                         || caracter.equals("8") || caracter.equals("9")
-                         || caracter.equals(".") || caracter.equals(","))) {
                     event.consume();
                  }
              }
@@ -265,8 +295,10 @@ public class EditarInter {
          guardaPro.add(texExistencia, 1, 4);
          guardaPro.add(pre, 0, 5);
          guardaPro.add(texPre, 1, 5);
-         guardaPro.add(bActualizar(), 1, 6);
-         guardaPro.add(bCancelar(), 0, 6);
+         guardaPro.add(bVender(), 2, 2);
+         guardaPro.add(bCancelar(), 1, 6);
+         guardaPro.add(cantidad, 2, 0);
+         guardaPro.add(texCantidad, 2, 1);
          
          general.setPadding(new Insets(15, 0, 0, 20));
          general.getChildren().add(titulo);
@@ -275,4 +307,6 @@ public class EditarInter {
          
          return general;
     }
+    
+    
 }

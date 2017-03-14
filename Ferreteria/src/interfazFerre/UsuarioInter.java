@@ -93,6 +93,7 @@ public class UsuarioInter extends Application {
         Scene salida = new Scene(panel, 500, 250);
         primaryStage.setTitle("Ingreso al Sistema");
         primaryStage.setScene(salida);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

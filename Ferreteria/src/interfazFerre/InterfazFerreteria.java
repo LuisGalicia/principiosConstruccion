@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
@@ -29,16 +30,29 @@ public class InterfazFerreteria extends Application {
     @Override
     public void start(Stage primaryStage) {
     VBox contiene = new VBox();
+    HBox titulos = new HBox();
     PanelInventario panel = new PanelInventario();
+    Fecha da = new Fecha();
     final Label titu = new Label("Sistema de Ferretería");
+    final Label date = new Label("Hoy: " + da.getDia() + "/" + 
+            (da.getMes() + 1) + "/" + 
+            da.getAnio());
     
+    date.setFont(new Font("Arial", 15));
     titu.setFont(new Font("Arial", 30));
+    
+    titulos.setSpacing(370);
+    titulos.setPadding(new Insets(10));
+    titulos.getChildren().add(titu);
+    titulos.getChildren().add(date);
+    
     contiene.setSpacing(10);
     contiene.setPadding(new Insets(10, 10, 10, 10));
-    contiene.getChildren().add(titu);
+    contiene.getChildren().add(titulos);
     contiene.getChildren().add(panel.opciones());
     
-    Scene salida = new Scene(contiene, 800, 800);
+    Scene salida = new Scene(contiene, 800, 700);
+    primaryStage.setResizable(false);
     primaryStage.setTitle("Ferreteria");
     primaryStage.setScene(salida);
     primaryStage.show();

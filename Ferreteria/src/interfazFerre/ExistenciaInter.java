@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -121,14 +122,20 @@ public class ExistenciaInter {
                 } catch (NumberFormatException e ) {
                     System.out.println("mal");
                 }
-                productos.get(pos).setExistencia(
-                        productos.get(pos).getExistencia() + exisAgregada);
+                if(exisAgregada == 0 || exisNueva.getText().isEmpty()) {
+                    noHayProducto();
+                    tab5.setContent(panExistencia());
+                    exisNueva.clear();
+                } else {
+                    productos.get(pos).setExistencia(
+                            productos.get(pos).getExistencia() + exisAgregada);
 
-                System.out.println("asigna");
-                inv.escritura(productos);
-                tab5.setContent(panExistencia());
-                agregadaCorrectamente();
-                exisNueva.clear();
+                    System.out.println("asigna");
+                    inv.escritura(productos);
+                    tab5.setContent(panExistencia());
+                    agregadaCorrectamente();
+                    exisNueva.clear();
+                }
              }
          });
          
@@ -165,6 +172,19 @@ public class ExistenciaInter {
     }
     
     /**
+     * Método que  crea cuadro dialogo de no hay existencias
+     * @return cuadro de información
+     */
+    public Alert noHayProducto() {
+        Alert agregado = new Alert(Alert.AlertType.INFORMATION);
+        agregado.setTitle("Nada agregado");
+        agregado.setHeaderText("No se han agregado existencias al producto");
+        agregado.setContentText(null);
+        agregado.showAndWait();
+        
+        return agregado;
+    }
+    /**
      * Método que crea VBox para mostrar cuando el producto se encuentra
      * @param pr producto
      * @return VBox de producto encontrado
@@ -192,6 +212,20 @@ public class ExistenciaInter {
          texName.setText(pr.getNombre());
          texClv.setText(pr.getClave());
          texExist.setText(String.valueOf(pr.getExistencia()));
+         exisNueva.setOnKeyTyped(new EventHandler<KeyEvent>() {
+             @Override
+             public void handle(KeyEvent event) {
+                 String caracter = event.getCharacter();
+                 if(!(caracter.equals("0") || caracter.equals("1")
+                         || caracter.equals("2") || caracter.equals("3")
+                         || caracter.equals("4") || caracter.equals("5")
+                         || caracter.equals("6") || caracter.equals("7")
+                         || caracter.equals("8") || caracter.equals("9"))) {
+                    event.consume();
+                 }
+             }
+         }
+         );
          
          agregando.setSpacing(10);
          agregando.getChildren().add(agregaExis);

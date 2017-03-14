@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -74,6 +75,36 @@ public class NuevoInter implements Serializable{
         
         Text titulo = new Text("Agrega producto nuevo");
         titulo.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        
+        texExistencia.setOnKeyTyped(new EventHandler<KeyEvent>() {
+             @Override
+             public void handle(KeyEvent event) {
+                 String caracter = event.getCharacter();
+                 if(!(caracter.equals("0") || caracter.equals("1")
+                         || caracter.equals("2") || caracter.equals("3")
+                         || caracter.equals("4") || caracter.equals("5")
+                         || caracter.equals("6") || caracter.equals("7")
+                         || caracter.equals("8") || caracter.equals("9"))) {
+                    event.consume();
+                 }
+             }
+         }
+         );
+         texPrecio.setOnKeyTyped(new EventHandler<KeyEvent>() {
+             @Override
+             public void handle(KeyEvent event) {
+                 String caracter = event.getCharacter();
+                 if(!(caracter.equals("0") || caracter.equals("1")
+                         || caracter.equals("2") || caracter.equals("3")
+                         || caracter.equals("4") || caracter.equals("5")
+                         || caracter.equals("6") || caracter.equals("7")
+                         || caracter.equals("8") || caracter.equals("9")
+                         || caracter.equals(".") || caracter.equals(","))) {
+                    event.consume();
+                 }
+             }
+         }
+         );
         
         campo.setPadding(new Insets(15, 30, 30, 20));
         campo.setVgap(20);

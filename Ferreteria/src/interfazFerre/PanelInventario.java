@@ -22,12 +22,14 @@ public class PanelInventario {
         MostrarInter muestra = new MostrarInter();
         EliminarInter elimina = new EliminarInter();
         BuscarInter busca = new BuscarInter();
+        VentaInter venta = new VentaInter();
         
         panel.getTabs().add(agrega.tabAgrega());
         panel.getTabs().add(edita.tabEdita());
         panel.getTabs().add(muestra.tabMuestra());
         panel.getTabs().add(elimina.tabElimina());
         panel.getTabs().add(busca.tabBusca());
+        panel.getTabs().add(venta.tabVenta());
         
         return panel;
     }
@@ -41,10 +43,12 @@ public class PanelInventario {
         AgregaInter agreEm = new AgregaInter();
         MostrarInter mosEm = new MostrarInter();
         BuscarInter busEm = new BuscarInter();
+        VentaInter venEm = new VentaInter();
         
         tabEmpleado.getTabs().add(agreEm.tabAgrega());
         tabEmpleado.getTabs().add(mosEm.tabMuestra());
         tabEmpleado.getTabs().add(busEm.tabBusca());
+        tabEmpleado.getTabs().add(venEm.tabVenta());
         
         return tabEmpleado;
     }
