@@ -19,8 +19,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el Tab de Buscar
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 10/03/2017
  */
 public class BuscarInter {
     private Label labIngresa = new Label("Ingresa nombre o clave del producto");
@@ -106,7 +108,11 @@ public class BuscarInter {
         });
         return boto;
     }
-     
+    
+    /**
+     * Método que crea botón para regresar a vista principal de Tab Buscar
+     * @return botón de buscarOtro
+     */
     public Button buscaOtro() {
         Button otro = new Button("Buscar otro");
         otro.setOnAction(new EventHandler<ActionEvent>() {
@@ -118,6 +124,7 @@ public class BuscarInter {
         
         return otro;
     }
+    
     /**
      * Método que crea cuadro de diálogo
      * @return cuadro de información

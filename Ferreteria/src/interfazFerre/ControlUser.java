@@ -11,8 +11,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 /**
- *
- * @author lugad
+ * Clase que contiene métodos para guardar usuarios
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 13/03/2017
  */
 public class ControlUser {
     
@@ -49,7 +51,7 @@ public class ControlUser {
     
     /**
      * Metodo que lee un archivo serializado
-     * @return arraylist tipo producto
+     * @return arraylist tipo User
      */
     public ArrayList<User> lectura() {
         try {

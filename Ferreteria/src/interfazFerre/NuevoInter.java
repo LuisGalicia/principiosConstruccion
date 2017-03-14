@@ -19,8 +19,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el Tab de Nuevo
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 9/03/2017
  */
 public class NuevoInter implements Serializable{
     private Producto prod;
@@ -35,23 +37,18 @@ public class NuevoInter implements Serializable{
     private final Label labTipoUnidad = new Label("Tipo de Unidad:");
     private final Label labPrecio = new Label("Precio:");
     private final Label labIngresa = new Label("Ingresa nombre o clave del producto");
+    private TextField texNombre = new TextField();
+    private TextField texClave = new TextField();
+    private TextField texDescripcion = new TextField();
+    private TextField texExistencia = new TextField();
+    private TextField texTipoUnidad = new TextField();
+    private TextField texPrecio = new TextField();
+    private TextField clvNombre = new TextField();
     
-    TextField texNombre;
-    TextField texClave;
-    TextField texDescripcion;
-    TextField texExistencia;
-    TextField texTipoUnidad;
-    TextField texPrecio;
-    TextField clvNombre;
-    
+    /**
+     * Constructor que inicializa ArrayList tipo producto e Inventario
+     */
     public NuevoInter() {
-        texNombre = new TextField();
-        texClave = new TextField();
-        texDescripcion = new TextField();
-        texExistencia = new TextField();
-        texTipoUnidad = new TextField();
-        texPrecio = new TextField();
-        clvNombre = new TextField();
         almacena = new ArrayList<>();
         inventario = new Inventario();
     }
@@ -99,6 +96,10 @@ public class NuevoInter implements Serializable{
         return campo;
     }
     
+    /**
+     * Método que crea botón para agregar contenido a ArrayList tipo producto
+     * @return botón de agregar
+     */
     public Button bAgregar() {
         Button boto = new Button("Agregar");
         
@@ -138,6 +139,11 @@ public class NuevoInter implements Serializable{
         return boto;
     }
     
+    /**
+     * Método que crea Alert de información cuando se agrega correctamente 
+     * las existencias
+     * @return Alert de existencias agregadas correctamente
+     */
     public Alert agregadoCorrec() {
         Alert agregado = new Alert(Alert.AlertType.INFORMATION);
         agregado.setTitle("Cuadro de Informacion");

@@ -5,13 +5,15 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el tab de Agregar
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 9/03/2017
  */
 public class AgregaInter {
     
     /**
-     * Método que crea el Tab de Agregar
+     * Método que contiene el Tab de Agregar
      * @return tab de agregar
      */
     public Tab tabAgrega() {

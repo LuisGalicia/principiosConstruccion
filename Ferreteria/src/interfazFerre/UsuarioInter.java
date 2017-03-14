@@ -10,6 +10,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -23,8 +24,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- *
- * @author lugad
+ * Clase que define la GUI para ingresar al sistema
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 13/03/2017
  */
 public class UsuarioInter extends Application {
     Button aceptar = new Button("Aceptar");
@@ -54,8 +57,24 @@ public class UsuarioInter extends Application {
                     Stage nue = new Stage();
                     InterfazFerreteria inFe = new InterfazFerreteria();
                     inFe.start(nue);
-                    System.out.println("funciona");
                     primaryStage.close();
+                }
+                
+                if(fieldUsua.getText().equals("empleado") && 
+                        fieldPass.getText().equals("12345")) {
+                    Stage nue = new Stage();
+                    InterfazEmpleado inFe = new InterfazEmpleado();
+                    inFe.start(nue);
+                    primaryStage.close();
+                }
+                
+                if(!(fieldUsua.getText().equals("empleado") ||
+                        fieldUsua.getText().equals("administrador"))) {
+                    Alert agregado = new Alert(Alert.AlertType.INFORMATION);
+                    agregado.setTitle("Cuadro de Informacion");
+                    agregado.setHeaderText("No se encontró usuario");
+                    agregado.showAndWait();
+                    
                 }
             }
         });

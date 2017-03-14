@@ -19,22 +19,31 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el Tab de Mostrar
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 10/03/2017
  */
 public class MostrarInter {
     private ArrayList<Producto> productos;
     private Inventario inv;
     private TableView<Producto> table;
-    Tab tabMuest = new Tab("Mostrar");
+    private Tab tabMuest = new Tab("Mostrar");
     private Button actualizar = new Button("Actualizar");
     
+    /**
+     * Constructor que inicializa ArrayList, Inventario y TableView
+     */
     public MostrarInter() {
         productos = new ArrayList<>();
         inv = new Inventario();
         table = new TableView<>();
     }
     
+    /**
+     * Tab que contiene información de Mostrar
+     * @return 
+     */
     public Tab tabMuestra() {
         tabMuest.setContent(panMostrar());
         tabMuest.setClosable(false);
@@ -42,6 +51,10 @@ public class MostrarInter {
         return tabMuest;
     }
     
+    /**
+     * VBox con vista principal de panel Mostrar
+     * @return VBox vista de Mostrar
+     */
     public VBox panMostrar() {
         VBox grupo = new VBox();
         
@@ -57,10 +70,16 @@ public class MostrarInter {
         return grupo;
     }
     
+    /**
+     * Método que actualiza información de TableView
+     * @return botón de actualizar
+     */
     public Button bActualizar() {
         actualizar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                TableView<Producto> pr = new TableView<>();
+                table = pr;
                 tabMuest.setContent(panMostrar());
                 
             }
@@ -69,6 +88,10 @@ public class MostrarInter {
         return actualizar;
     }
     
+    /**
+     * Método que agrega valores a TableView de Productos
+     * @return TableView con valores de productos
+     */
     public TableView tableMuestra() {
         productos = inv.lectura();
         

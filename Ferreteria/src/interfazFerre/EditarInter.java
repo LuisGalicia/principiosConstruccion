@@ -20,8 +20,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el Tab de Editar
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 11/03/2017
  */
 public class EditarInter {
     private Label labIngresa = new Label("Ingresa nombre o clave del producto");
@@ -147,6 +149,21 @@ public class EditarInter {
     }
     
     /**
+     * Método que cancela opción y vuelve a vista principal del tab Eliminar
+     * @return botón cancelar
+     */
+    public Button bCancelar() {
+        Button cance = new Button("Cancelar");
+        cance.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tabEdita.setContent(panEdita());
+            }
+        });
+        return cance;
+    }
+    
+    /**
      * Método que crea cuadro de diálogo
      * @return cuadro de información
      */
@@ -218,6 +235,7 @@ public class EditarInter {
          guardaPro.add(pre, 0, 5);
          guardaPro.add(texPre, 1, 5);
          guardaPro.add(bActualizar(), 1, 6);
+         guardaPro.add(bCancelar(), 0, 6);
          
          general.setPadding(new Insets(15, 0, 0, 20));
          general.getChildren().add(titulo);

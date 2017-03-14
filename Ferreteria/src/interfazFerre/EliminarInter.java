@@ -19,8 +19,10 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el Tab de eliminar
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 12/03/2017
  */
 public class EliminarInter {
     private Label labIngresa = new Label("Ingresa nombre o clave del producto");
@@ -109,6 +111,10 @@ public class EliminarInter {
         return boto;
     }
     
+    /**
+     * Método que crea botón de eliminar
+     * @return botón de eliminar
+     */
     public Button bEliminar() {
         Button eli = new Button("Eliminar");
         eli.setOnAction(new EventHandler<ActionEvent>() {
@@ -123,6 +129,21 @@ public class EliminarInter {
             }
         });
         return eli;
+    }
+    
+    /**
+     * Método que cancela opción y vuelve a vista principal del tab Eliminar
+     * @return botón cancelar
+     */
+    public Button bCancelar() {
+        Button cance = new Button("Cancelar");
+        cance.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tabEliminar.setContent(panElimina());
+            }
+        });
+        return cance;
     }
     
     /**
@@ -203,6 +224,7 @@ public class EliminarInter {
          guardaPro.add(pre, 0, 5);
          guardaPro.add(texPre, 1, 5);
          guardaPro.add(bEliminar(), 1, 6);
+         guardaPro.add(bCancelar(), 0, 6);
          
          general.setPadding(new Insets(15, 0, 0, 20));
          general.getChildren().add(titulo);

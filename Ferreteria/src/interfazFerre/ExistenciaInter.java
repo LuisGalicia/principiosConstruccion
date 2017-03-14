@@ -20,20 +20,25 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
- * @author lugad
+ * Clase que contiene el Tab de Existencia
+ * @author Luis Galicia
+ * @version 0.1
+ * Fecha: 9/03/2017
  */
 public class ExistenciaInter {
-    TextField clvNombre = new TextField();
-    TextField exisNueva = new TextField();
-    Tab tab5 = new Tab("Existencia");
-    ArrayList<Producto> productos;
-    Producto aux = new Producto();
+    private TextField clvNombre = new TextField();
+    private TextField exisNueva = new TextField();
+    private Tab tab5 = new Tab("Existencia");
+    private ArrayList<Producto> productos;
+    private Producto aux = new Producto();
     private Inventario inv;
     boolean bandera = false;
     private int exisAgregada = 0;
     private int pos;
     
+    /**
+     * Constructor que inicializa Inventario y arrayList tipo producto
+     */
     public ExistenciaInter() {
         this.inv = new Inventario();
         this.productos = new ArrayList<>();
@@ -49,6 +54,10 @@ public class ExistenciaInter {
         return tab5;
     }
     
+    /**
+     * Pane que contiene información para Tab de eliminar
+     * @return GridPane de existencia
+     */
     public GridPane panExistencia() {
         GridPane exis = new GridPane();
         Label labIngresa = new Label("Ingresa nombre o clave del producto");
@@ -66,7 +75,11 @@ public class ExistenciaInter {
         return exis;
     }
     
-     public Button bBuscar() {
+    /**
+     * Método que crea botón para buscar producto
+     * @return botón de buscar
+     */
+    public Button bBuscar() {
         Button boto = new Button("Buscar");
         boto.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -92,7 +105,11 @@ public class ExistenciaInter {
         });
         return boto;
     }
-     
+    
+    /**
+     * Método que crea botón para agregar existencia a producto
+     * @return botón de agregar existencia
+     */
      public Button agregaExis() {
          Button existen = new Button("Agregar");
          existen.setOnAction(new EventHandler<ActionEvent>() {
@@ -117,7 +134,11 @@ public class ExistenciaInter {
          
          return existen;
      }
-     
+    
+    /**
+     * Método que crea un Alert de información cuando no se encuentra producto
+     * @return Alert de no se encontró información
+     */
     public Alert noSeEncontro() {
         Alert agregado = new Alert(Alert.AlertType.INFORMATION);
         agregado.setTitle("Cuadro de Informacion");
@@ -128,6 +149,11 @@ public class ExistenciaInter {
         return agregado;
     }
     
+    /**
+     * Método que crea Alert de información cuando se agrega correctamente 
+     * las existencias
+     * @return Alert de existencias agregadas correctamente
+     */
     public Alert agregadaCorrectamente() {
         Alert agregado = new Alert(Alert.AlertType.INFORMATION);
         agregado.setTitle("Cuadro de Informacion");
@@ -137,8 +163,13 @@ public class ExistenciaInter {
         
         return agregado;
     }
-     
-     public VBox productoBuscado(Producto pr) {
+    
+    /**
+     * Método que crea VBox para mostrar cuando el producto se encuentra
+     * @param pr producto
+     * @return VBox de producto encontrado
+     */
+    public VBox productoBuscado(Producto pr) {
          VBox general = new VBox();
          GridPane guardaPro = new GridPane();
          HBox agregando = new HBox();
